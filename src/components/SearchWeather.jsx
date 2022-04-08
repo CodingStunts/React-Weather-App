@@ -37,10 +37,10 @@ const SearchWeather = () => {
         <h3>*Current date and time*</h3>
         <hr className="rule" />
         <div className="primary-results">
-          <h2>{weatherData.main.temp}&deg;C</h2>
+          <h2>{weatherData.main.temp - 273.15}&deg;C</h2>
           <i className="weather-icon">🌧️</i>
           <ul>
-            <li>Windy</li>
+            <li>Cloudy</li>
             <li>Raining</li>
           </ul>
         </div>
