@@ -2,12 +2,23 @@
   text-align: center;
 }
 
+/* Fonts */
+@font-face {
+  font-family: title-font;
+  src: url(fonts/Gochi_Hand/GochiHand-Regular.ttf);
+}
+
 /*My CSS*/
 .page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.title {
+  font-family: title-font;
+  font-size: 6.5vw;
 }
 
 .search {
@@ -28,6 +39,10 @@
   margin: 5%;
 }
 
+.city-selection {
+  font-size: 4.5vw;
+}
+
 .rule {
   border: solid 2px black;
   border-radius: 40%;
@@ -42,6 +57,5 @@
 }
 
 .weather-icon {
-  font-size: 75px;
   margin: 3vh 10vw;
 }

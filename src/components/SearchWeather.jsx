@@ -9,7 +9,7 @@ const SearchWeather = () => {
   useEffect(() => {
     const fetchWeatherData = async () => {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${search},uk&units=metric&APPID=f6c6ca4478a624208f693170a66f8c41`
+        `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&APPID=f6c6ca4478a624208f693170a66f8c41`
       );
       setWeatherData(await response.json());
     };
@@ -28,7 +28,7 @@ const SearchWeather = () => {
     <div>
       {weatherData.main ? (
         <div className="page">
-          <h1 className="title">Jay's UK Weather Station</h1>
+          <h1 className="title">Jay's Weather Station</h1>
           <section className="search">
             <form onSubmit={handleSubmit}>
               <input
@@ -46,7 +46,10 @@ const SearchWeather = () => {
             <hr className="rule" />
             <div className="primary-results">
               <h2>{weatherData.main.temp}&deg;C</h2>
-              <i className="weather-icon">{weatherData.weather[0].icon}</i>
+              <img
+                className="weather-icon"
+                src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              />
               <ul>
                 <li>{weatherData.weather[0].main}</li>
                 <p>{weatherData.weather[0].description}</p>
@@ -57,14 +60,16 @@ const SearchWeather = () => {
               <p>
                 Low {weatherData.main.temp_min}
                 &deg;C | High {weatherData.main.temp_max}
-                &deg; C
+                &deg;C
               </p>
             </div>
             <hr className="rule" />
             <div className="extra-info">
               <ul>
-                <li>UV Index</li>
-                <li>Wind Strength</li>
+                <li>Humidity: {weatherData.main.humidity}%</li>
+                <li>
+                  Wind: {weatherData.wind.speed} going {weatherData.wind.deg}
+                </li>
               </ul>
             </div>
           </section>
