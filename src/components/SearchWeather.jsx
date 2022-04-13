@@ -24,6 +24,21 @@ const SearchWeather = () => {
   let date = new Date();
   let dateTime = date.toGMTString();
 
+  let condition = "";
+  if (weatherData.weather) {
+    if (weatherData.weather[0].main === "Clear") condition = "sunny";
+    else if (weatherData.weather[0].main === "Clouds") condition = "cloudy";
+    else if (weatherData.weather[0].main === "Snow") condition = "snowy";
+    else if (weatherData.weather[0].main === "Thunderstorm")
+      condition = "stormy";
+    else if (
+      weatherData.weather[0].main === "Rain" ||
+      weatherData.weather[0].main === "Drizzle"
+    )
+      condition = "rainy";
+    else condition = "haze";
+  }
+
   let windDirection = "";
   if (weatherData.wind) {
     if (weatherData.wind.deg >= 0 && weatherData.wind.deg < 22.5)
@@ -50,6 +65,11 @@ const SearchWeather = () => {
     <div>
       {weatherData.main ? (
         <div className="page">
+          <img
+            src={require(`../background-photos/${condition}.jpg`)}
+            alt="dynamic-background"
+            className="background"
+          />
           <h1 className="title">Jay's Weather Station</h1>
           <section className="search">
             <form onSubmit={handleSubmit}>
@@ -71,6 +91,7 @@ const SearchWeather = () => {
               <img
                 className="weather-icon"
                 src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                alt="weather-icon"
               />
               <ul>
                 <li>{weatherData.weather[0].main}</li>
