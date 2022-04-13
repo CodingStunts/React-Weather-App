@@ -24,6 +24,28 @@ const SearchWeather = () => {
   let date = new Date();
   let dateTime = date.toGMTString();
 
+  let windDirection = "";
+  if (weatherData.wind) {
+    if (weatherData.wind.deg >= 0 && weatherData.wind.deg < 22.5)
+      windDirection = "North";
+    else if (weatherData.wind.deg >= 22.5 && weatherData.wind.deg < 67.5)
+      windDirection = "Northeast";
+    else if (weatherData.wind.deg >= 67.5 && weatherData.wind.deg < 112.5)
+      windDirection = "East";
+    else if (weatherData.wind.deg >= 122.5 && weatherData.wind.deg < 157.5)
+      windDirection = "Southeast";
+    else if (weatherData.wind.deg >= 157.5 && weatherData.wind.deg < 202.5)
+      windDirection = "South";
+    else if (weatherData.wind.deg >= 202.5 && weatherData.wind.deg < 247.5)
+      windDirection = "Southwest";
+    else if (weatherData.wind.deg >= 247.5 && weatherData.wind.deg < 292.5)
+      windDirection = "West";
+    else if (weatherData.wind.deg >= 292.5 && weatherData.wind.deg < 337.5)
+      windDirection = "Northwest";
+    else if (weatherData.wind.deg >= 337.5 && weatherData.wind.deg < 360)
+      windDirection = "North";
+  }
+
   return (
     <div>
       {weatherData.main ? (
@@ -68,7 +90,8 @@ const SearchWeather = () => {
               <ul>
                 <li>Humidity: {weatherData.main.humidity}%</li>
                 <li>
-                  Wind: {weatherData.wind.speed} going {weatherData.wind.deg}
+                  Wind: {weatherData.wind.speed}m/s, coming from the{" "}
+                  {windDirection}
                 </li>
               </ul>
             </div>
@@ -76,7 +99,7 @@ const SearchWeather = () => {
           <button>History</button>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1 className="loading-screen">Loading...</h1>
       )}
     </div>
   );
