@@ -42,44 +42,44 @@ const SearchWeather = () => {
   let windDirection = "";
   if (weatherData.wind) {
     if (weatherData.wind.deg >= 0 && weatherData.wind.deg < 22.5)
-      windDirection = "North";
+      windDirection = "North ⬇️";
     else if (weatherData.wind.deg >= 22.5 && weatherData.wind.deg < 67.5)
-      windDirection = "Northeast";
+      windDirection = "Northeast ↙️";
     else if (weatherData.wind.deg >= 67.5 && weatherData.wind.deg < 112.5)
-      windDirection = "East";
+      windDirection = "East ⬅️";
     else if (weatherData.wind.deg >= 122.5 && weatherData.wind.deg < 157.5)
-      windDirection = "Southeast";
+      windDirection = "Southeast ↖";
     else if (weatherData.wind.deg >= 157.5 && weatherData.wind.deg < 202.5)
-      windDirection = "South";
+      windDirection = "South ⬆️";
     else if (weatherData.wind.deg >= 202.5 && weatherData.wind.deg < 247.5)
-      windDirection = "Southwest";
+      windDirection = "Southwest ↗️";
     else if (weatherData.wind.deg >= 247.5 && weatherData.wind.deg < 292.5)
-      windDirection = "West";
+      windDirection = "West ➡️";
     else if (weatherData.wind.deg >= 292.5 && weatherData.wind.deg < 337.5)
-      windDirection = "Northwest";
+      windDirection = "Northwest ↘️";
     else if (weatherData.wind.deg >= 337.5 && weatherData.wind.deg < 360)
-      windDirection = "North";
+      windDirection = "North ⬇️";
   }
 
   return (
     <div>
       {weatherData.main ? (
-        <div className="page">
-          <img
-            src={require(`../background-photos/${condition}.jpg`)}
-            alt="dynamic-background"
-            className="background"
-          />
-          <h1 className="title">Jay's Weather Station</h1>
+        <div className={`page ${condition}`}>
+          <h1 className="title">
+            Jay's <br /> Weather Station
+          </h1>
           <section className="search">
             <form onSubmit={handleSubmit}>
               <input
+                className="searchbar"
                 type="text"
                 required
                 placeholder="Where are you thinking?"
                 onChange={(e) => setTextInput(e.target.value)}
               ></input>
-              <button type="submit">Search</button>
+              <button className="searchbutton" type="submit">
+                Search
+              </button>
             </form>
           </section>
           <section className="results-section">
@@ -87,7 +87,7 @@ const SearchWeather = () => {
             <h3>{dateTime}</h3>
             <hr className="rule" />
             <div className="primary-results">
-              <h2>{weatherData.main.temp}&deg;C</h2>
+              <h2 className="temperature">{weatherData.main.temp}&deg;C</h2>
               <img
                 className="weather-icon"
                 src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
