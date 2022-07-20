@@ -5,6 +5,17 @@ const SearchWeather = () => {
   const [search, setSearch] = useState("Manchester");
   const [weatherData, setWeatherData] = useState({});
   const [textInput, setTextInput] = useState("");
+  const [dateTime, setDateTime] = useState(new Date().toLocaleDateString())
+  let lat;
+  let long;
+useEffect(()=>{
+    window.navigator.geolocation.getCurrentPosition((position)=>{
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
+      console.log(lat, long);
+    });
+  }, []);
+  //  geocoder = new Google.maps.Geocoder();
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -21,8 +32,11 @@ const SearchWeather = () => {
     setSearch(textInput);
   };
 
-  let date = new Date();
-  let dateTime = date.toGMTString();
+  useEffect(()=>{
+  setInterval(()=>{
+    setDateTime(new Date().toLocaleString())
+}, 1000);
+});
 
   let condition = "";
   if (weatherData.weather) {
