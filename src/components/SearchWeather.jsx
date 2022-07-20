@@ -8,7 +8,8 @@ const SearchWeather = () => {
   const [dateTime, setDateTime] = useState(new Date().toLocaleDateString())
   let lat;
   let long;
-useEffect(()=>{
+
+  useEffect(()=>{
     window.navigator.geolocation.getCurrentPosition((position)=>{
       lat = position.coords.latitude;
       long = position.coords.longitude;
